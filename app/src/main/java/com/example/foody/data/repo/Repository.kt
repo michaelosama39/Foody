@@ -6,12 +6,12 @@ import com.example.foody.utilts.performGetOperation
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource
+    private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource
 ) {
 
-    fun getRecipeList() = performGetOperation(dataBaseQuery = { localDataSource.getRecipes() },
+    fun getRecipeList() = performGetOperation(
+        dataBaseQuery = { localDataSource.getRecipes() },
         netWorkCall = { remoteDataSource.getRecipes() },
-        saveCallResult = { localDataSource.insertRecipes(it.RecipesModelItem) })
+        saveCallResult = { localDataSource.insertRecipes(it.results) })
 
 }

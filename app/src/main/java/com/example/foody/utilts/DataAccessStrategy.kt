@@ -1,5 +1,6 @@
 package com.example.foody.utilts
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -15,15 +16,14 @@ import kotlinx.coroutines.Dispatchers
 
 fun <T, A> performGetOperation(
     dataBaseQuery: () -> LiveData<T>, // functions from Local data source
-    netWorkCall: suspend () -> Resource<A>, // functions from remote data source
+    netWorkCall: suspend () -> Resource<A>,
     saveCallResult: suspend (A) -> Unit
 ): LiveData<Resource<T>> =
-
-
 
     liveData(Dispatchers.IO) {
         //Start with loading state
         emit(Resource.loading())
+
         // Attach this scope with local database live data scope
         // set as a default data source
         val source = dataBaseQuery.invoke().map { Resource.success(it) }
@@ -31,6 +31,8 @@ fun <T, A> performGetOperation(
 
         // Get Data From Remote Data source "API"
         val responseStatus = netWorkCall.invoke()
+        Log.e("data" , responseStatus.data.toString())
+
         // if Data success
         if (responseStatus.status == Resource.Status.SUCCESS) {
             //Save data to local DataBase
@@ -41,15 +43,3 @@ fun <T, A> performGetOperation(
             emitSource(source)
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-

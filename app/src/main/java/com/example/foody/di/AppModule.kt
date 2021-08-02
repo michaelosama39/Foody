@@ -43,7 +43,6 @@ object AppModule {
 
     @Provides
     fun provideRepository(
-        remoteDataSource: RemoteDataSource,
-        localDataSource: LocalDataSource) =
-        Repository(remoteDataSource, localDataSource)
+        remoteDataSource: RemoteDataSource , localDataSource: LocalDataSource) =
+        Repository(remoteDataSource , localDataSource)
 }

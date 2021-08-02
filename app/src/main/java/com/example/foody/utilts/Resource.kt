@@ -1,6 +1,6 @@
 package com.example.foody.utilts
 
-data class Resource<T>(val status: Status, val data: T?, val message: String?) {
+data class Resource<T>(val status: Status, val data:T?, val message: String?) {
 
     enum class Status {
         SUCCESS, ERROR, LOADING

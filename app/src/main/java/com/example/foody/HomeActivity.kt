@@ -16,6 +16,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+//        val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+//
+//        val navController = findNavController(R.id.fragment_container)
+//        bottom_navigation.setupwithNavController(navController)
+
         val fragmentRecipes = RecipesFragment()
         val fragmentFavorites = FavoritesFragment()
         val fragmentFoodJoke = FoodJokeFragment()

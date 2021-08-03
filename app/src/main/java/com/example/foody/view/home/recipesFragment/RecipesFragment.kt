@@ -5,15 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.example.foody.R
+import androidx.navigation.fragment.findNavController
 import com.example.foody.adapter.RecipesAdapter
 import com.example.foody.utilts.BusinessConst
 import com.example.foody.utilts.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_recipes.*
 import java.util.*
 
@@ -63,18 +66,9 @@ class RecipesFragment : Fragment() , RecipesAdapter.RecipeItemListener{
     }
 
     override fun onRecipesItemClicked(recipesModelItem: Result) {
-//        val bundle = Bundle()
-//        bundle.putString(BusinessConst.NEWS_DATA_ITEM, recipesModelItem.toString())
-//        val fragment = DetailsFragment()
-//        fragment.arguments = bundle
-//        val fragmentTransaction: FragmentTransaction = getFragmentManager()!!.beginTransaction()
-//        fragmentTransaction.replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
-
-        val fragment = DetailsFragment()
-        fragmentManager!!
-            .beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
-
+        findNavController().navigate(
+            R.id.from_list_to_details_action,
+            bundleOf(BusinessConst.NEWS_DATA_ITEM to recipesModelItem)
+        )
     }
 }
